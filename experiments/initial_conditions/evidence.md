@@ -8,7 +8,7 @@ relative speed error and whether P stays finite, symmetric and positive definite
 Grid: true speed 1, 2, 5, 10, 15, 20, 25 px/frame; 24 true headings over the full
 circle (initial heading error up to +-pi); turn rate -0.08, 0, +0.08 rad/frame;
 centre noise 0 px (1 run) and 2 px (10 seeds). 5,544 runs. Full numbers in
-`results.json` (`by_k`, k = 2..10).
+`summary.json` (`by_k`, k = 2..10).
 
 | noise | speed (px/frame) | heading err. median / p95 after 4 det. (rad) | after 10 det. (rad) |
 |---|---|---|---|

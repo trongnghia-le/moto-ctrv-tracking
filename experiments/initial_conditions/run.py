@@ -33,7 +33,7 @@ NOISES = [0.0, 2.0]                                # px, centre jitter
 SEEDS = range(10)                                  # noisy runs only
 K_MAX = 10                                         # visible detections
 WH = np.array([30.0, 40.0])
-OUT = pathlib.Path(__file__).with_name("results.json")
+OUT = pathlib.Path(__file__).with_name("summary.json")  # results.json is gitignored repo-wide
 
 
 def run_one(v0, th0, om, noise, seed):
