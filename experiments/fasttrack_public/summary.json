@@ -1,0 +1,438 @@
+{
+  "motorbike": {
+    "det_yolo11n.txt": {
+      "seq_count": 5,
+      "gt_boxes": 4315,
+      "arms": {
+        "baseline": {
+          "mota": -0.0127,
+          "idf1": 0.0009,
+          "hota05": 0.0006,
+          "idsw": 0,
+          "fn": 4311,
+          "fp": 59
+        },
+        "ctrv": {
+          "mota": -0.0121,
+          "idf1": 0.0,
+          "hota05": 0.0,
+          "idsw": 0,
+          "fn": 4315,
+          "fp": 52
+        },
+        "ctrv_nsa": {
+          "mota": -0.0116,
+          "idf1": 0.0003,
+          "hota05": 0.0002,
+          "idsw": 0,
+          "fn": 4314,
+          "fp": 51
+        },
+        "ctrv_gate": {
+          "mota": -0.0148,
+          "idf1": 0.0,
+          "hota05": 0.0,
+          "idsw": 0,
+          "fn": 4315,
+          "fp": 64
+        },
+        "ctrv_gate_nsa": {
+          "mota": -0.0144,
+          "idf1": 0.0002,
+          "hota05": 0.0002,
+          "idsw": 0,
+          "fn": 4314,
+          "fp": 63
+        },
+        "ocsort": {
+          "mota": -0.0014,
+          "idf1": 0.0,
+          "hota05": 0.0,
+          "idsw": 0,
+          "fn": 4315,
+          "fp": 6
+        },
+        "ocsort_matched": {
+          "mota": -0.0192,
+          "idf1": 0.0095,
+          "hota05": 0.0058,
+          "idsw": 0,
+          "fn": 4287,
+          "fp": 111
+        },
+        "ocsort_byte": {
+          "mota": -0.0241,
+          "idf1": 0.0002,
+          "hota05": 0.0001,
+          "idsw": 0,
+          "fn": 4314,
+          "fp": 105
+        },
+        "botsort": {
+          "mota": -0.0088,
+          "idf1": 0.0,
+          "hota05": 0.0,
+          "idsw": 0,
+          "fn": 4315,
+          "fp": 38
+        },
+        "botsort_matched": {
+          "mota": -0.0155,
+          "idf1": 0.0002,
+          "hota05": 0.0001,
+          "idsw": 0,
+          "fn": 4314,
+          "fp": 68
+        }
+      },
+      "seed_bias": {
+        "c2_vs_bt": {
+          "true_gt": -0.0007,
+          "bt_seeded": -0.0013,
+          "c2_seeded": -0.0,
+          "bracket_from_c2_seed": [
+            -0.0001,
+            -0.0
+          ],
+          "corrected_080": -0.0001
+        },
+        "oc_vs_c2": {
+          "true_gt": 0.0093,
+          "bt_seeded": 0.0,
+          "c2_seeded": -0.0002,
+          "bracket_from_c2_seed": [
+            -0.0002,
+            0.3525
+          ],
+          "corrected_080": 0.282
+        }
+      }
+    },
+    "det_yolo11x.txt": {
+      "seq_count": 5,
+      "gt_boxes": 4315,
+      "arms": {
+        "baseline": {
+          "mota": 0.178,
+          "idf1": 0.2859,
+          "hota05": 0.1892,
+          "idsw": 3,
+          "fn": 3455,
+          "fp": 89
+        },
+        "ctrv": {
+          "mota": 0.1817,
+          "idf1": 0.2933,
+          "hota05": 0.2047,
+          "idsw": 3,
+          "fn": 3438,
+          "fp": 90
+        },
+        "ctrv_nsa": {
+          "mota": 0.1819,
+          "idf1": 0.2936,
+          "hota05": 0.205,
+          "idsw": 3,
+          "fn": 3437,
+          "fp": 90
+        },
+        "ctrv_gate": {
+          "mota": 0.1817,
+          "idf1": 0.2933,
+          "hota05": 0.2047,
+          "idsw": 3,
+          "fn": 3438,
+          "fp": 90
+        },
+        "ctrv_gate_nsa": {
+          "mota": 0.1819,
+          "idf1": 0.2936,
+          "hota05": 0.205,
+          "idsw": 3,
+          "fn": 3437,
+          "fp": 90
+        },
+        "ocsort": {
+          "mota": 0.0503,
+          "idf1": 0.0577,
+          "hota05": 0.0417,
+          "idsw": 5,
+          "fn": 4048,
+          "fp": 45
+        },
+        "ocsort_matched": {
+          "mota": 0.2304,
+          "idf1": 0.3095,
+          "hota05": 0.2339,
+          "idsw": 4,
+          "fn": 3181,
+          "fp": 136
+        },
+        "ocsort_byte": {
+          "mota": 0.191,
+          "idf1": 0.3124,
+          "hota05": 0.2269,
+          "idsw": 2,
+          "fn": 3387,
+          "fp": 102
+        },
+        "botsort": {
+          "mota": 0.0505,
+          "idf1": 0.093,
+          "hota05": 0.0635,
+          "idsw": 1,
+          "fn": 4010,
+          "fp": 86
+        },
+        "botsort_matched": {
+          "mota": 0.1824,
+          "idf1": 0.2898,
+          "hota05": 0.1938,
+          "idsw": 5,
+          "fn": 3436,
+          "fp": 87
+        }
+      },
+      "seed_bias": {
+        "c2_vs_bt": {
+          "true_gt": 0.0076,
+          "bt_seeded": -0.2158,
+          "c2_seeded": 0.2119,
+          "bracket_from_c2_seed": [
+            0.2092,
+            0.2119
+          ],
+          "corrected_080": 0.2097
+        },
+        "oc_vs_c2": {
+          "true_gt": 0.0159,
+          "bt_seeded": -0.0909,
+          "c2_seeded": -0.2308,
+          "bracket_from_c2_seed": [
+            -0.2308,
+            0.2344
+          ],
+          "corrected_080": 0.1414
+        }
+      }
+    }
+  },
+  "two_wheeler": {
+    "det_yolo11n.txt": {
+      "seq_count": 7,
+      "gt_boxes": 15524,
+      "arms": {
+        "baseline": {
+          "mota": 0.0569,
+          "idf1": 0.0449,
+          "hota05": 0.0463,
+          "idsw": 2,
+          "fn": 14629,
+          "fp": 10
+        },
+        "ctrv": {
+          "mota": 0.0557,
+          "idf1": 0.0434,
+          "hota05": 0.0459,
+          "idsw": 3,
+          "fn": 14637,
+          "fp": 19
+        },
+        "ctrv_nsa": {
+          "mota": 0.0558,
+          "idf1": 0.0435,
+          "hota05": 0.0459,
+          "idsw": 3,
+          "fn": 14636,
+          "fp": 18
+        },
+        "ctrv_gate": {
+          "mota": 0.056,
+          "idf1": 0.0445,
+          "hota05": 0.0461,
+          "idsw": 2,
+          "fn": 14634,
+          "fp": 19
+        },
+        "ctrv_gate_nsa": {
+          "mota": 0.056,
+          "idf1": 0.0444,
+          "hota05": 0.0461,
+          "idsw": 2,
+          "fn": 14635,
+          "fp": 18
+        },
+        "ocsort": {
+          "mota": 0.0344,
+          "idf1": 0.0186,
+          "hota05": 0.0263,
+          "idsw": 4,
+          "fn": 14986,
+          "fp": 0
+        },
+        "ocsort_matched": {
+          "mota": -0.0403,
+          "idf1": 0.0681,
+          "hota05": 0.0643,
+          "idsw": 1,
+          "fn": 14545,
+          "fp": 1603
+        },
+        "ocsort_byte": {
+          "mota": 0.0587,
+          "idf1": 0.0641,
+          "hota05": 0.0609,
+          "idsw": 1,
+          "fn": 14593,
+          "fp": 18
+        },
+        "botsort": {
+          "mota": 0.0381,
+          "idf1": 0.0286,
+          "hota05": 0.0294,
+          "idsw": 4,
+          "fn": 14917,
+          "fp": 11
+        },
+        "botsort_matched": {
+          "mota": 0.0564,
+          "idf1": 0.0448,
+          "hota05": 0.0465,
+          "idsw": 5,
+          "fn": 14624,
+          "fp": 19
+        }
+      },
+      "seed_bias": {
+        "c2_vs_bt": {
+          "true_gt": -0.0005,
+          "bt_seeded": -0.0007,
+          "c2_seeded": -0.0001,
+          "bracket_from_c2_seed": [
+            -0.0003,
+            -0.0001
+          ],
+          "corrected_080": -0.0003
+        },
+        "oc_vs_c2": {
+          "true_gt": 0.0237,
+          "bt_seeded": 0.0216,
+          "c2_seeded": 0.0213,
+          "bracket_from_c2_seed": [
+            0.0213,
+            0.853
+          ],
+          "corrected_080": 0.6867
+        }
+      }
+    },
+    "det_yolo11x.txt": {
+      "seq_count": 7,
+      "gt_boxes": 15524,
+      "arms": {
+        "baseline": {
+          "mota": 0.1717,
+          "idf1": 0.3254,
+          "hota05": 0.3421,
+          "idsw": 18,
+          "fn": 9818,
+          "fp": 3023
+        },
+        "ctrv": {
+          "mota": 0.1728,
+          "idf1": 0.327,
+          "hota05": 0.3458,
+          "idsw": 18,
+          "fn": 9800,
+          "fp": 3023
+        },
+        "ctrv_nsa": {
+          "mota": 0.1741,
+          "idf1": 0.3277,
+          "hota05": 0.3471,
+          "idsw": 18,
+          "fn": 9790,
+          "fp": 3014
+        },
+        "ctrv_gate": {
+          "mota": 0.1733,
+          "idf1": 0.3373,
+          "hota05": 0.3528,
+          "idsw": 17,
+          "fn": 9791,
+          "fp": 3025
+        },
+        "ctrv_gate_nsa": {
+          "mota": 0.1747,
+          "idf1": 0.3381,
+          "hota05": 0.3542,
+          "idsw": 17,
+          "fn": 9780,
+          "fp": 3015
+        },
+        "ocsort": {
+          "mota": 0.2128,
+          "idf1": 0.241,
+          "hota05": 0.2645,
+          "idsw": 22,
+          "fn": 11937,
+          "fp": 262
+        },
+        "ocsort_matched": {
+          "mota": 0.009,
+          "idf1": 0.3381,
+          "hota05": 0.3691,
+          "idsw": 18,
+          "fn": 9263,
+          "fp": 6104
+        },
+        "ocsort_byte": {
+          "mota": 0.0884,
+          "idf1": 0.3449,
+          "hota05": 0.3684,
+          "idsw": 15,
+          "fn": 9695,
+          "fp": 4441
+        },
+        "botsort": {
+          "mota": 0.2157,
+          "idf1": 0.3043,
+          "hota05": 0.3201,
+          "idsw": 7,
+          "fn": 11551,
+          "fp": 617
+        },
+        "botsort_matched": {
+          "mota": 0.1749,
+          "idf1": 0.3372,
+          "hota05": 0.3513,
+          "idsw": 20,
+          "fn": 9762,
+          "fp": 3027
+        }
+      },
+      "seed_bias": {
+        "c2_vs_bt": {
+          "true_gt": 0.0127,
+          "bt_seeded": 0.0069,
+          "c2_seeded": 0.0229,
+          "bracket_from_c2_seed": [
+            0.016,
+            0.0229
+          ],
+          "corrected_080": 0.0174
+        },
+        "oc_vs_c2": {
+          "true_gt": -0.0,
+          "bt_seeded": -0.0281,
+          "c2_seeded": -0.0324,
+          "bracket_from_c2_seed": [
+            -0.0324,
+            0.1228
+          ],
+          "corrected_080": 0.0917
+        }
+      }
+    }
+  }
+}

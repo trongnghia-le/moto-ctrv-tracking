@@ -104,7 +104,7 @@ tests/                      unit tests
 ## Installation
 
 ```bash
-git clone https://github.com/tronghia256-EdgeAI/moto-ctrv-tracking.git
+git clone https://github.com/trongnghia-le/moto-ctrv-tracking.git
 cd moto-ctrv-tracking
 python -m venv .venv
 # Windows: .venv\Scripts\activate    Linux/macOS: source .venv/bin/activate
@@ -181,10 +181,10 @@ The accompanying manuscript is in preparation. Until it is published, please cit
 
 ```bibtex
 @software{le2026mototracking,
-  author  = {Le, Trong Nghia and Nguyen, Viet Nam and Ho, Minh Hieu and Vo, Xuan Lanh and Nguyen, Thien Bao},
+  author  = {Le, Trong Nghia and Vo, Xuan Lanh and Nguyen, Thien Bao},
   title   = {moto-ctrv-tracking: Class-Conditioned {CTRV} Tracking for Motorcycle-Dominant Mixed Traffic},
   year    = {2026},
-  url     = {https://github.com/tronghia256-EdgeAI/moto-ctrv-tracking}
+  url     = {https://github.com/trongnghia-le/moto-ctrv-tracking}
 }
 ```
 
