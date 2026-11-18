@@ -68,9 +68,17 @@ def xyxy(b):
     return np.array([b[0], b[1], b[0] + b[2], b[1] + b[3]])
 
 
-def ctrv_predict(boxes, t0, hide):
+def ctrv_predict(boxes, t0, hide, freeze_omega=False):
+    """C2's CTRV EKF; freeze_omega pins omega at 0 (same Q, R, P0 and bootstrap),
+    which isolates the turn-rate state from the filter's other differences to the linear KF."""
     m = CTRVMotionModel()
     m.init(xyxy(boxes[t0 - WARM]))
+    if freeze_omega:
+        m.P[4, :] = 0.0
+        m.P[:, 4] = 0.0
+        m.P[4, 4] = 1e-12
+        m.Q = m.Q.copy()
+        m.Q[4, 4] = 0.0
     for k in range(t0 - WARM + 1, t0 + 1):
         m.predict()
         m.update(xyxy(boxes[k]))
@@ -113,8 +121,8 @@ def classify(c, t0):
     return None
 
 
-def main(gt_path):
-    gt = np.loadtxt(gt_path, delimiter=",")
+def evaluate(gt):
+    """All classified windows at the current TURN / MIN_SPEED, with the three filters' errors."""
     events = []
     for tid, frames, boxes in runs(gt):
         c = centres(boxes)
@@ -127,31 +135,53 @@ def main(gt_path):
                 continue
             truth = c[t0 + HIDE]
             diag = float(np.hypot(*boxes[t0 + HIDE][2:]))
-            e_ctrv = float(np.linalg.norm(ctrv_predict(boxes, t0, HIDE)[-1] - truth) / diag)
-            e_lin = float(np.linalg.norm(linear_predict(boxes, t0, HIDE)[-1] - truth) / diag)
+            err = lambda p: float(np.linalg.norm(p[-1] - truth) / diag)  # noqa: E731
             events.append(dict(tid=tid, frame=int(frames[t0]), kind=cls[0], w_before=round(float(cls[1]), 4),
                                w_after=round(float(cls[2]), 4), speed=round(float(speed), 2),
-                               err_ctrv=round(e_ctrv, 4), err_linear=round(e_lin, 4)))
-    summary = {"params": dict(WARM=WARM, HIDE=HIDE, TURN=TURN, STRAIGHT=STRAIGHT, MIN_SPEED=MIN_SPEED),
-               "motorcycle_runs": sum(1 for r in runs(gt)), "by_kind": {}}
-    for kind in ("reversal", "steady", "straight"):
+                               err_ctrv=round(err(ctrv_predict(boxes, t0, HIDE)), 4),
+                               err_omega0=round(err(ctrv_predict(boxes, t0, HIDE, freeze_omega=True)), 4),
+                               err_linear=round(err(linear_predict(boxes, t0, HIDE)), 4)))
+    return events
+
+
+def share_ci(ev, a, b, reps=2000, seed=20261118):
+    """Share of windows with err_a > err_b, and its 95% interval from a bootstrap over tracks
+    (windows of one track overlap, so tracks, not windows, are the independent units)."""
+    tids = sorted({e["tid"] for e in ev})
+    by = {t: np.array([e[a] > e[b] for e in ev if e["tid"] == t], dtype=float) for t in tids}
+    point = float(np.mean(np.concatenate(list(by.values()))))
+    rng = np.random.default_rng(seed)
+    boots = []
+    for _ in range(reps):
+        pick = rng.choice(len(tids), len(tids), replace=True)
+        boots.append(np.mean(np.concatenate([by[tids[i]] for i in pick])))
+    lo, hi = np.percentile(boots, [2.5, 97.5])
+    return [round(point, 3), round(float(lo), 3), round(float(hi), 3)]
+
+
+def stats(events, kinds=("reversal", "steady", "straight")):
+    out = {}
+    for kind in kinds:
         ev = [e for e in events if e["kind"] == kind]
         if not ev:
+            out[kind] = None
             continue
-        ec, el = np.array([e["err_ctrv"] for e in ev]), np.array([e["err_linear"] for e in ev])
-        # one event per track (the first) as a dependence check
-        first = {}
-        for e in ev:
-            first.setdefault(e["tid"], e)
-        fc = np.array([e["err_ctrv"] for e in first.values()])
-        fl = np.array([e["err_linear"] for e in first.values()])
-        summary["by_kind"][kind] = dict(
-            windows=len(ev), tracks=len(first),
-            median_err_ctrv=round(float(np.median(ec)), 3), median_err_linear=round(float(np.median(el)), 3),
-            share_ctrv_worse=round(float(np.mean(ec > el)), 3),
-            per_track_median_ctrv=round(float(np.median(fc)), 3), per_track_median_linear=round(float(np.median(fl)), 3),
-            per_track_share_ctrv_worse=round(float(np.mean(fc > fl)), 3))
-    summary["events"] = events
+        med = lambda k: round(float(np.median([e[k] for e in ev])), 3)  # noqa: E731
+        out[kind] = dict(windows=len(ev), tracks=len({e["tid"] for e in ev}),
+                         median_err_ctrv=med("err_ctrv"), median_err_omega0=med("err_omega0"),
+                         median_err_linear=med("err_linear"),
+                         ctrv_worse_than_linear=share_ci(ev, "err_ctrv", "err_linear"),
+                         ctrv_worse_than_omega0=share_ci(ev, "err_ctrv", "err_omega0"),
+                         omega0_worse_than_linear=share_ci(ev, "err_omega0", "err_linear"))
+    return out
+
+
+def main(gt_path):
+    gt = np.loadtxt(gt_path, delimiter=",")
+    events = evaluate(gt)
+    summary = {"params": dict(WARM=WARM, HIDE=HIDE, TURN=TURN, STRAIGHT=STRAIGHT, MIN_SPEED=MIN_SPEED),
+               "note": "shares are [point, 2.5%, 97.5%] with a bootstrap over tracks",
+               "motorcycle_runs": len(runs(gt)), "by_kind": stats(events), "events": events}
     OUT.write_text(json.dumps(summary, indent=1))
     for k, v in summary["by_kind"].items():
         print(k, v)
